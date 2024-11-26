@@ -1,0 +1,94 @@
+#nombreUsuario {
+    text-transform: uppercase; /* Convierte el texto a mayúsculas solo visualmente */
+}
+/* Estilo global */
+body {
+    background: #252e3d; /* Fondo oscuro para la página */
+    font-family: 'Montserrat', sans-serif;
+    height: 100vh; /* Asegura que la página ocupe toda la altura */
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column; /* Alinea el contenido en columna */
+    justify-content: flex-start;
+    align-items: center; /* Centra el contenido */
+}
+
+/* Estilo para la tarjeta de arriba */
+.card {
+    display: flex;
+    flex-direction: column; /* Coloca los elementos en columna */
+    justify-content: center; /* Centra el contenido verticalmente */
+    align-items: center; /* Centra el contenido horizontalmente */
+    background: #252e3d; /* Fondo oscuro para la tarjeta */
+    padding: 15px 30px; /* Hacemos el recuadro más delgado */
+    border-radius: 20px;
+    box-shadow: 20px 20px 30px -10px rgba(0, 0, 0, 0.3), -5px -5px 10px rgba(61, 72, 92, 0.4); /* Efecto neumórfico oscuro */
+    text-align: center;
+    width: 100%; /* Hacemos que ocupe todo el ancho de la pantalla */
+    max-width: 600px; /* Limita el ancho máximo para que no sea muy grande */
+    position: fixed; /* Hace que el recuadro esté fijo en la parte superior */
+    top: 0; /* Asegura que se quede pegado a la parte superior */
+    left: 50%;
+    transform: translateX(-50%); /* Centra el recuadro horizontalmente */
+    margin-top: 10px; /* Margen pequeño desde la parte superior */
+}
+
+/* Títulos */
+h2 {
+    font-size: 24px;
+    color: #35a994; /* Color brillante para el título */
+    margin-bottom: 5px;
+}
+
+h1 {
+    font-size: 36px;
+    color: #f4a261; /* Color naranja claro para el texto "Mi Amor" */
+    margin: 0;
+}
+
+p {
+    color: #40757e; /* Color para el texto de párrafos */
+    font-size: 16px; /* Tamaño de texto ajustado */
+}
+
+/* Media queries para hacerlo responsive */
+@media screen and (max-width: 768px) {
+    .card {
+        padding: 10px 20px; /* Menos padding en pantallas pequeñas */
+        max-width: 90%; /* La tarjeta puede ocupar más espacio */
+        margin-top: 20px; /* Un poco más de margen en pantallas más pequeñas */
+    }
+
+    h2 {
+        font-size: 20px; /* Reduce el tamaño del título en pantallas pequeñas */
+    }
+
+    h1 {
+        font-size: 28px; /* Reduce el tamaño del título en pantallas pequeñas */
+    }
+
+    p {
+        font-size: 14px; /* Reduce el tamaño de texto para adaptarse mejor a pantallas pequeñas */
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .card {
+        padding: 8px 15px; /* Menos padding en pantallas más pequeñas */
+        max-width: 95%; /* La tarjeta puede ocupar casi todo el ancho */
+        margin-top: 25px; /* Un margen mayor en pantallas muy pequeñas */
+    }
+
+    h2 {
+        font-size: 18px; /* Títulos aún más pequeños */
+    }
+
+    h1 {
+        font-size: 24px; /* Títulos más pequeños en dispositivos muy pequeños */
+    }
+
+    p {
+        font-size: 12px; /* Texto más pequeño */
+    }
+}

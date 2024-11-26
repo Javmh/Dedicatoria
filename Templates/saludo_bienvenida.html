@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Romantic Style</title>
+  <!-- Enlaces a los estilos -->
+  <link rel="stylesheet" href="../Styles/neomor_sec3styles.css">
+  <link rel="stylesheet" href="../Styles/neomor_sec2styles.css">
+  <link rel="stylesheet" href="../Styles/neomor_sec1styles.css">
+
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> <!-- Aseguramos la carga de Font Awesome -->
+  
+  <script>
+    // Recuperamos los registros almacenados en localStorage
+    window.onload = function() {
+      var registros = JSON.parse(localStorage.getItem("registros")) || [];
+      if (registros.length > 0) {
+        // Recuperamos el primer nombre y apellido del primer registro (asumimos que es el más reciente)
+        var nombre = registros[registros.length - 1].nombre;
+        var apellido = registros[registros.length - 1].apellido;
+
+        // Actualizamos el contenido del título con el nombre ingresado
+        document.getElementById("nombreUsuario").textContent = nombre;
+      }
+    }
+  </script>
+
+</head>
+<body>
+  <!-- Card Section -->
+  <div class="card">
+    <h2><span id="nombreUsuario" style="color: #35a994;">Nombre</span>, <span style="color: #f4a261;">Mi Amor</span> 😍</h2>
+  </div>
+
+  <!-- Nueva Sección con el Círculo -->
+  <div class="new-section">
+    <div class="circle-container">
+      <div class="circle"></div>
+    </div>
+  </div>
+
+  <!-- Sección con dos contenedores: Texto y Botón -->
+  <div class="section">
+    <!-- Contenedor de texto -->
+    <div class="text-container">
+      <p>"Te convertiste en la luna, <br>
+         que no quiero dejar de observar, <br>
+         aquella que ilumina con su luz, <br>
+         mis noches de soledad ✨, <br>
+         eres hermosa y <br>
+         a tu lado quiero estar, <br>
+         lástima que solo de lejos <br>
+         te puedo apreciar..."❤️‍🩹</p>
+    </div>
+
+    <!-- Contenedor de botón -->
+    <div class="button-container">
+      <button class="btn" onclick="openModal()">
+        <i class="fas fa-heart"></i> <!-- Icono de corazón -->
+      </button>
+    </div>
+  </div>
+  
+  <!-- Modal con el Video -->
+  <div class="modal" id="videoModal">
+    <div class="modal-content">
+      <!-- Video embebido desde YouTube -->
+      <iframe src="https://www.youtube.com/embed/FxPrHFIJvjU" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+      <span class="close" onclick="closeModal()">&times;</span>
+    </div>
+  </div>
+
+  <!-- Enlazamos el archivo JavaScript -->
+  <script src="../JavaScripts/modal.js"></script>
+  <!-- Agrega Font Awesome para el ícono (si lo deseas) -->
+  <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+</body>
+</html>

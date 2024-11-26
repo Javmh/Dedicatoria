@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio de Sesión</title>
+    <link rel="stylesheet" href="styles.css">
+    <script>
+        // Función para almacenar los datos en localStorage y redirigir a la página de saludo
+        function ingresar() {
+            var nombre = document.getElementById("nombre").value;
+            var apellido = document.getElementById("apellido").value;
+
+            // Validar que los campos no estén vacíos
+            if (nombre) {
+                // Obtener los registros existentes en localStorage
+                var registros = JSON.parse(localStorage.getItem("registros")) || [];
+
+                // Agregar el nuevo nombre y apellido a los registros
+                registros.push({ nombre: nombre, apellido: apellido });
+
+                // Guardar la lista de registros en localStorage
+                localStorage.setItem("registros", JSON.stringify(registros));
+
+                // Redirigir a la página de saludo
+                window.location.href = "Templates/saludo_bienvenida.html";
+            } else {
+                alert("Por favor, ingrese ambos campos.");
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Hola, Bienvenida</h1>
+        <p>Ingrese los datos por favor!!!</p>
+        <form onsubmit="event.preventDefault(); ingresar();">
+            <input type="text" placeholder="Nombres" id="nombre" required>
+            <input type="text" placeholder="Apellidos" id="apellido" >
+            <button type="submit">Ingresar</button>
+        </form>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

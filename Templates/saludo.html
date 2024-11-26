@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bienvenido</title>
+    <script>
+        // Función para mostrar todos los registros guardados
+        function mostrarRegistros() {
+            // Obtener los registros almacenados en localStorage
+            var registros = JSON.parse(localStorage.getItem("registros")) || [];
+
+            // Verificar si hay registros
+            if (registros.length > 0) {
+                var listaRegistros = "<h2>Lista de personas registradas:</h2>";
+                // Recorrer los registros y mostrar cada uno
+                registros.forEach(function(registro) {
+                    listaRegistros += "<p>¡Bienvenido " + registro.nombre + " " + registro.apellido + "!</p>";
+                });
+                document.getElementById("registros").innerHTML = listaRegistros;
+            } else {
+                document.getElementById("registros").innerHTML = "<p>No hay registros.</p>";
+            }
+        }
+    </script>
+</head>
+<body onload="mostrarRegistros();">
+    <h1>Bienvenido</h1>
+    <!-- Aquí se mostrarán todos los registros -->
+    <div id="registros"></div>
+</body>
+</html>
