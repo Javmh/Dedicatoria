@@ -8,27 +8,117 @@
   <link rel="stylesheet" href="../Styles/neomor_sec3styles.css">
   <link rel="stylesheet" href="../Styles/neomor_sec2styles.css">
   <link rel="stylesheet" href="../Styles/neomor_sec1styles.css">
-
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> <!-- Aseguramos la carga de Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> 
   
-  <script>
-    // Recuperamos los registros almacenados en localStorage
-    window.onload = function() {
-      var registros = JSON.parse(localStorage.getItem("registros")) || [];
-      if (registros.length > 0) {
-        // Recuperamos el primer nombre y apellido del primer registro (asumimos que es el más reciente)
-        var nombre = registros[registros.length - 1].nombre;
-        var apellido = registros[registros.length - 1].apellido;
+  <style>
+    /* Contenedor del gato caminando */
+    #animation-container {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      height: 120px;
+      pointer-events: none;
+      z-index: 100;
+    }
 
-        // Actualizamos el contenido del título con el nombre ingresado
-        document.getElementById("nombreUsuario").textContent = nombre;
+    #cat-wrapper {
+      display: flex;
+      align-items: center;
+      position: absolute;
+      bottom: 10px;
+      left: -120px;
+    }
+
+    /* Contenedor de la imagen del gato */
+    #cat-container {
+      width: 120px;
+      height: 120px;
+      position: relative;
+    }
+
+    /* Imagen del gato */
+    #cat-image {
+      width: 120px;
+      height: 120px;
+      object-fit: contain;
+    }
+
+    /* Contenedor para texto al costado e imagen debajo */
+    #side-content {
+      display: none;
+      flex-direction: column;
+      margin-left: 10px;
+    }
+
+    #side-text-right {
+      font-size: 20px;
+      color: white;
+      font-weight: bold;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+      white-space: nowrap;
+    }
+
+    #text-image {
+      width: 150px;
+      height: auto;
+      margin-top: 5px;
+    }
+
+    /* Control de música */
+    #music-control {
+      position: fixed;
+      bottom: 10px;
+      right: 10px;
+      z-index: 1000;
+      background-color: rgba(255, 255, 255, 0.7);
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    /* Ajustes para móviles */
+    @media (max-width: 768px) {
+      #cat-container {
+        width: 100px;
+        height: 100px;
+      }
+
+      #cat-image {
+        width: 100px;
+        height: 100px;
+      }
+
+      #side-text-right {
+        font-size: 16px;
+      }
+
+      #text-image {
+        width: 120px;
+      }
+
+      #side-content {
+        margin-left: 5px;
       }
     }
-  </script>
-
+  </style>
 </head>
+
 <body>
+  <!-- Audio para la música de fondo (oculto) -->
+  <audio id="background-music" loop autoplay>
+    <source src="musica_fondo.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- Control de música -->
+  <div id="music-control" onclick="toggleMusic()">
+    <i id="music-icon" class="fas fa-pause"></i>
+  </div>
+
   <!-- Card Section -->
   <div class="card">
     <h2><span id="nombreUsuario" style="color: #35a994;">Nombre</span>, <span style="color: #f4a261;">Mi Amor</span> 😍</h2>
@@ -46,35 +136,194 @@
     <!-- Contenedor de texto -->
     <div class="text-container">
       <p>"Te convertiste en la luna, <br>
-         que no quiero dejar de observar, <br>
-         aquella que ilumina con su luz, <br>
-         mis noches de soledad ✨, <br>
-         eres hermosa y <br>
-         a tu lado quiero estar, <br>
-         lástima que solo de lejos <br>
-         te puedo apreciar..."❤️‍🩹</p>
+         en mis noches de soledad, <br>
+         un reflejo dulce y puro <br>
+         que no quiero dejar de mirar ✨, <br>
+         tus ojos son hermosos como las estrellas <br>
+          que brillan con intensidad, <br>
+         en su luz me voy perdiendo y siempre <br>
+         a tu lado quiero estar...<br>
+         Siempre quise ser un Gato <br>
+         con patitas de algodon, <br>
+         para posarme en tu pecho<br>
+         y robarme tu corazón..."❤️‍🩹</p>
     </div>
 
     <!-- Contenedor de botón -->
     <div class="button-container">
       <button class="btn" onclick="openModal()">
-        <i class="fas fa-heart"></i> <!-- Icono de corazón -->
+        <i class="fas fa-heart"></i>
       </button>
     </div>
   </div>
-  
+
+  <!-- Gato caminando -->
+  <div id="animation-container">
+    <div id="cat-wrapper">
+      <div id="cat-container">
+        <img id="cat-image" src="https://img001.prntscr.com/file/img001/sMzmIIBmS1Geoj6fwcbzvg.png" alt="Gato caminando">
+      </div>
+      <!-- Contenido al costado (visible en todas las pantallas) -->
+      <div id="side-content">
+        <div id="side-text-right">¡Mira quién vino a visitarnos!</div>
+        <img id="text-image" src="gatotexto.png" alt="Texto decorativo">
+      </div>
+    </div>
+  </div>
+
   <!-- Modal con el Video -->
   <div class="modal" id="videoModal">
     <div class="modal-content">
-      <!-- Video embebido desde YouTube -->
       <iframe src="https://www.youtube.com/embed/FxPrHFIJvjU" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
       <span class="close" onclick="closeModal()">&times;</span>
     </div>
   </div>
 
-  <!-- Enlazamos el archivo JavaScript -->
-  <script src="../JavaScripts/modal.js"></script>
-  <!-- Agrega Font Awesome para el ícono (si lo deseas) -->
-  <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+  <script>
+    // Variables para control de música
+    const backgroundMusic = document.getElementById('background-music');
+    const musicControl = document.getElementById('music-control');
+    const musicIcon = document.getElementById('music-icon');
+    let isMusicPlaying = true;
+
+    // Configurar música con volumen bajo
+    backgroundMusic.volume = 0.5;
+
+    // Función para alternar la música
+    function toggleMusic() {
+      if (isMusicPlaying) {
+        backgroundMusic.pause();
+        musicIcon.classList.remove('fa-pause');
+        musicIcon.classList.add('fa-play');
+      } else {
+        backgroundMusic.play();
+        musicIcon.classList.remove('fa-play');
+        musicIcon.classList.add('fa-pause');
+      }
+      isMusicPlaying = !isMusicPlaying;
+    }
+
+    // Función para abrir el modal
+    function openModal() {
+      document.getElementById("videoModal").style.display = "flex";
+      backgroundMusic.pause();
+      musicIcon.classList.remove('fa-pause');
+      musicIcon.classList.add('fa-play');
+      isMusicPlaying = false;
+    }
+
+    // Función para cerrar el modal
+    function closeModal() {
+      document.getElementById("videoModal").style.display = "none";
+      backgroundMusic.play();
+      musicIcon.classList.remove('fa-play');
+      musicIcon.classList.add('fa-pause');
+      isMusicPlaying = true;
+    }
+
+    // Solución mejorada para autoplay
+    document.addEventListener('click', function() {
+      // Solo intentar reproducir si no está ya reproduciendo
+      if (backgroundMusic.paused) {
+        backgroundMusic.play()
+          .then(() => {
+            isMusicPlaying = true;
+            musicIcon.classList.remove('fa-play');
+            musicIcon.classList.add('fa-pause');
+          })
+          .catch(e => console.log("Error al reproducir:", e));
+      }
+    }, { once: true }); // Solo se ejecuta una vez
+
+    window.onload = function() {
+      console.log("Página cargada, ejecutando scripts...");
+
+      // Recuperar nombre desde localStorage
+      var registros = JSON.parse(localStorage.getItem("registros")) || [];
+      console.log("Registros guardados en localStorage:", registros);
+
+      if (registros.length > 0) {
+        var nombre = registros[registros.length - 1].nombre || "AMOR";
+        nombre = nombre.toUpperCase();
+        console.log("Nombre recuperado:", nombre);
+
+        // Asignar el nombre al elemento correspondiente
+        var nombreUsuarioElem = document.getElementById("nombreUsuario");
+        var sideTextRightElem = document.getElementById("side-text-right");
+
+        if (nombreUsuarioElem) {
+          nombreUsuarioElem.textContent = nombre;
+        }
+        if (sideTextRightElem) {
+          sideTextRightElem.textContent = `${nombre}`;
+        }
+      }
+
+      // Configuración del gato
+      const config = {
+        images: [
+          'gato.png', 
+          'gato2.png'
+        ],
+        specialImage: 'gato3.png',
+        speed: 2,
+        frameRate: 200,
+        pauseDuration: 5000
+      };
+      
+      const catWrapper = document.getElementById('cat-wrapper');
+      const catImage = document.getElementById('cat-image');
+      const sideContent = document.getElementById('side-content');
+      
+      let currentFrame = 0;
+      let position = -120;
+      let isPaused = false;
+      let hasPaused = false;
+      
+      function changeFrame() {
+        if (isPaused) return;
+        currentFrame = (currentFrame + 1) % config.images.length;
+        catImage.src = config.images[currentFrame];
+      }
+
+      function checkPauseCondition() {
+        const containerCenter = window.innerWidth / 2;
+        const catCenter = position + 40;
+
+        if (!hasPaused && catCenter >= containerCenter - 50 && catCenter <= containerCenter + 50) {
+          isPaused = true;
+          hasPaused = true;
+          
+          catImage.src = config.specialImage;
+          sideContent.style.display = 'flex';
+          
+          setTimeout(() => {
+            isPaused = false;
+            sideContent.style.display = 'none';
+            catImage.src = config.images[0];
+          }, config.pauseDuration);
+        }
+      }
+
+      function animateCat() {
+        if (!isPaused) {
+          position += config.speed;
+          catWrapper.style.left = position + 'px';
+          changeFrame();
+          checkPauseCondition();
+          
+          if (position > window.innerWidth) {
+            position = -120;
+            hasPaused = false;
+          }
+        }
+        
+        setTimeout(animateCat, config.frameRate);
+      }
+
+      // Iniciar animación del gato
+      animateCat();
+    };
+  </script>
 </body>
 </html>
